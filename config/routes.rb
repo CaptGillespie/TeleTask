@@ -1,3 +1,16 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :appointments
+  resources :patients
+  resources :doctors
+
+  resources :doctors, path: "/properties"
+  resources :appointments, only: [:new, :create]
+  post "appointments/incoming", to: 'appointments#accept_or_reject', as: 'incoming'
+
+  # Home page
+  root 'main#index', as: 'home'
+
 end
+
+
