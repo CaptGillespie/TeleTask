@@ -1,0 +1,24 @@
+<h2>Request an Appointment</h2>
+
+<%= form_with do |f| %>
+    <div style="width: 100%; height: 20px; border-bottom: 1px solid black; text-align: center">
+        <span style="font-size: 20px; padding: 0 10px;">
+            General Practitioners
+        </span>
+    </div>
+
+    <div style="width: 100%; height: auto; border: 1px solid black; text-align: center; padding: 10px;">
+        <%= f.label :doctorKey, "Doctor(s)" %>
+        <%= f.collection_select(:doctorKey, Doctor.all, :PKey, :Name)  %>
+
+        <br />
+        <%= f.label :apptDate, 'Preferred Appointment Date' %>
+        <%= f.date_field :apptDate, :value => Time.now.strftime('%Y-%m-%d') %>
+        <br />
+        <%= f.label :apptTime, 'Preferred Time Slot' %>
+        <%= f.time_field :apptTime, :value => Time.now %>
+        <br /><br />
+        <%= f.submit 'Request Appointment' %>
+    </div>
+
+<% end %>
