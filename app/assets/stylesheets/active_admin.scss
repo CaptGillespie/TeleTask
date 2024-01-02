@@ -1,0 +1,255 @@
+@import 'activeadmin_addons/all';
+// SASS variable overrides must be declared before loading up Active Admin's styles.
+//
+// To view the variables that Active Admin provides, take a look at
+// `app/assets/stylesheets/active_admin/mixins/_variables.scss` in the
+// Active Admin source.
+//
+// For example, to change the sidebar width:
+// $sidebar-width: 242px;
+
+// Active Admin's got SASS!
+@import "active_admin/mixins";
+@import "active_admin/base";
+
+
+// Overriding any non-variable SASS must be done after the fact.
+// For example, to change the default status-tag color:
+//
+//   .status_tag { background: #6090DB; }
+
+.command_box {
+  border: 1px solid gray;
+  width: 90%;
+  padding: 10px;
+}
+
+.sidebarCommand{
+  display:none;
+}
+
+.erb_multi{
+  color: #444;
+  line-height: 28px;
+  display: block;
+  padding-left: 8px;
+  padding-right: 20px;
+  overflow: auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 175px;
+  border-radius: 5px;
+}
+.erb_multi{
+  color: #444;
+  line-height: 28px;
+  display: block;
+  padding-left: 8px;
+  padding-right: 20px;
+  overflow: auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 80px;
+  border-radius: 5px;
+}
+.erb_panel_multi{
+  color: #444;
+  line-height: 28px;
+  display: block;
+  padding-left: 8px;
+  padding-right: 20px;
+  overflow: auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 200px;
+  border-radius: 5px;
+  width: 90% !important;
+}
+.erb_opetator{
+  color: #444;
+  line-height: 28px;
+  display: block;
+  padding-left: 8px;
+  padding-right: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 26px;
+  border-radius: 5px;
+}
+
+.erb_year_select{
+  color: #444;
+  line-height: 28px;
+  display: block;
+  padding-left: 8px;
+  padding-right: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 26px;
+  border-radius: 5px;
+  width: 100% !important;
+}
+
+.erb_panel{
+  border: 1px solid gray;
+  margin: auto;
+  width: 95%;
+  padding: 10px;
+  text-align: center;
+}
+
+.commandPanel{
+  outline:2px solid gray;
+  padding: 5px;
+}
+.erb_year{
+  color: #444;
+  line-height: 28px;
+  width: 70% !important;
+  padding-left: 8px;
+  padding-right: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 26px;
+  border-radius: 5px;
+}
+
+.erb_text_sm{
+  color: #444;
+  line-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 17px;
+  display: inline;
+  width: 40% !important;
+  padding: 8px 8px 8px !important;
+}
+.erb_text{
+  color: #444;
+  line-height: 28px;
+  width: 70% !important;
+  padding-left: 8px;
+  padding-right: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 18px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.erb_forf{
+  color: #444;
+  line-height: 28px;
+  width: 100% !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 26px;
+  border-radius: 5px;
+  display: inline;
+}
+
+#permit_table tr{
+  max-width: 30%;
+}
+#permit_table td{
+  max-width: 30%;
+}
+.erb_forf_amount{
+  color: #444;
+  line-height: 28px;
+  width: 100% !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 26px;
+  border-radius: 5px;
+  display: inline;
+  padding: 0 !important
+}
+
+.erb_date{
+  width: 61% !important;
+  margin-bottom: 10px !important;
+}
+.attributes_table table th {
+  text-transform: none;
+}
+
+.btn_new {
+  margin-bottom: 10px;
+  a {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.btn_new_panel{
+  float: right !important;
+  margin-bottom: 10px;
+  a {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.mb-5 {
+  margin-bottom: 5px !important;
+}
+.new_instance {
+  display: inline;
+}
+table.tableBodyScroll {
+   tbody {
+     display: block;
+     max-height: 300px;
+     overflow-y: scroll;
+   }
+
+   thead, tbody tr {
+     display: table;
+     width: 100%;
+     table-layout: fixed;
+   }
+
+    thead {
+      width: calc(100% - 1.1em);
+    }
+}
+.scroll_panel {
+    //border: 8px solid black;
+    max-width: 100%;
+    overflow-x:scroll;
+}
+table.tableBodyScrollHorizontal {
+  table tbody thead tr{
+    display: block;
+    table-layout: fixed;
+  }
+  tbody {
+    max-width: 100%;
+  }
+}
+select[readonly].select2-hidden-accessible + .select2-container {
+  pointer-events: none;
+  touch-action: none;
+}
+input[readonly]{
+  background: #eee;
+  box-shadow: none;
+  pointer-events: none;
+  touch-action: none;
+}
+select[readonly].select2-hidden-accessible + .select2-container .select2-selection {
+  background: #eee;
+  box-shadow: none;
+}
+
+select[readonly].select2-hidden-accessible + .select2-container .select2-selection__arrow, select[readonly].select2-hidden-accessible + .select2-container .select2-selection__clear {
+  display: none;
+}

@@ -10,7 +10,6 @@
     <div style="width: 100%; height: auto; border: 1px solid black; text-align: center; padding: 10px;">
         <%= f.label :doctorKey, "Doctor(s)" %>
         <%= f.collection_select(:doctorKey, Doctor.all, :PKey, :Name)  %>
-
         <br />
         <%= f.label :apptDate, 'Preferred Appointment Date' %>
         <%= f.date_field :apptDate, :value => Time.now.strftime('%Y-%m-%d') %>

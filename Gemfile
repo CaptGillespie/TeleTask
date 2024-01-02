@@ -25,6 +25,9 @@ gem "devise"
 gem "sass-rails", "~> 5.0"
 gem "activerecord-sqlserver-adapter", "5.2.0.rc1"
 gem "twilio-ruby"
+gem "activeadmin_addons", "1.7.0"
+gem "turbolinks", "~> 5"
+
 
 group :development, :test do
   gem "dotenv-rails"
