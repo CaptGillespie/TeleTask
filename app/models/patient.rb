@@ -1,4 +1,7 @@
 class Patient < ApplicationRecord
+    self.table_name = "tblPatients"
+    self.primary_key = :PatientID
+
     has_many :doctors
     has_many :appointments, through: :doctors
 

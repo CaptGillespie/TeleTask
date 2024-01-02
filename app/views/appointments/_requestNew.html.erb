@@ -1,0 +1,22 @@
+
+<% @doctorKey = locals[:doctorKey] %>
+
+<%= form_with url: '/doctorAppt', method: 'post', local: false do |f| %>
+
+
+    <div style="text-align: center; padding: 10px;">
+        <%# <%= f.label :doctorKey, "Doctor(s)" %>
+        <%# <%= f.collection_select(:doctorKey, Doctor.all, :PKey, :Name)  %> 
+        <%# <br /> %> 
+        <%= f.hidden_field :DoctorID, :value => @doctorKey %>
+
+        <%= f.label :ApptDate, 'Preferred Appointment Date' %>
+        <%= f.date_field :ApptDate, :value => Time.now.strftime('%Y-%m-%d') %>
+        <br />
+        <%= f.label :ApptTime, 'Preferred Time Slot' %>
+        <%= f.time_field :ApptTime, :value => Time.now %>
+        <br /><br />
+        <%= f.submit 'Request Appointment' %>
+    </div>
+
+<% end %>

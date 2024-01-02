@@ -13,26 +13,25 @@ class AppointmentsController < ApplicationController
       name.flatten![0] if !name.empty?
   end
 
-  def new_appt_req
-    #on (POST :/ route) aka New Appointment form submit, sends texts to doctor's office with requested appointment patient/datetime 
-    #TODO add logged-in users as 'patient' name
-    loggedUser = 'Sean'
+  def send_Request
+    #sends texts to doctor's office with requested appointment's patient/datetime 
 
     #Print would-be-text sent
-    #In a real-world app, we'd want to log it somewhere too for posterity
     p "***************************************************************************"
-    phone_number = getDoctor_Phone(params[:doctorKey])
-    doctor_name = getDoctor_Name(params[:doctorKey])
-    p "Patient: #{loggedUser} requests an appointment with Doctor #{doctor_name} on #{params[:apptDate]} at #{params[:apptTime]}"
+    phone_number = getDoctor_Phone(params[:DoctorID])
+    doctor_name = getDoctor_Name(params[:DoctorID])
+
+    p 'To: ' + phone_number 
+    p "Patient: #{current_admin_user.Name} requests an appointment with Doctor #{doctor_name} on #{params[:ApptDate]} at #{params[:ApptTime]}"
     p "***************************************************************************"
 
-    #TODO - configure Twilio
+    #TODO - configure Twilio Opt-ins - Outgoing message is being blocked as 'spam'
     @app_number = ENV['TWILIO_NUMBER']
         @client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
-        phone_number = getDoctor_Phone(params[:doctorKey])
-        doctor_name = getDoctor_Name(params[:doctorKey])
-        message = "Patient: #{loggedUser} requests an appointment with Doctor #{doctor_name} on #{params[:apptDate]} at #{params[:apptTime]}"
-        sms_message = @client.account.messages.create(
+        phone_number = getDoctor_Phone(params[:DoctorID])
+        doctor_name = getDoctor_Name(params[:DoctorID])
+        message = "Patient: #{current_admin_user.Name} requests an appointment with Doctor #{doctor_name} on #{params[:apptDate]} at #{params[:apptTime]}"
+        sms_message = @client.api.account.messages.create(
             from: @app_number,
             to: phone_number,
             body: message,
@@ -41,28 +40,16 @@ class AppointmentsController < ApplicationController
 
 
 
-
-
-
-
-
-
-
-
-  def new
-    @appointment = Appointment.new
-  end
-
-  def create
-    @appointment = Appointment.new(appointment_params)
-
-    if @appointment.save
-      flash[:notice] = "Appointment request has been sent."
-      @appointment.notify_host
-      redirect_to @doctor
-    else
-      flast[:danger] = @appointment.errors
-    end
+  def doctor_Appt
+    #Create a new Appointment
+    @doctorName = getDoctor_Name(params[:DoctorID])
+    @aptDate = (params[:ApptDate].to_datetime + Time.parse(params[:ApptTime]).seconds_since_midnight.seconds).strftime("%Y-%m-%d %H:%M:%S")
+    insertrecord = ActiveRecord::Base.connection.exec_query("INSERT INTO tblAppointments VALUES(#{current_admin_user.id}, '#{current_admin_user.Name}', #{params[:DoctorID]}, '#{@doctorName}', 0, 'Pending', '#{@aptDate}')").rows
+    flash[:notice] = "Appointment request has been sent."
+    
+    #Sent text to the Doctor's Office
+      send_Request()
+      redirect_to admin_doctor_url
   end
 
 
@@ -91,15 +78,12 @@ class AppointmentsController < ApplicationController
 
   private
   # Send an SMS back to the Patient
-  def respond(message)
-    response = Twilio::TwiML::Response.new do |r|
-      r.Message message
-    end
-    render text: response.text
-  end
+  # def respond(message)
+  #   response = Twilio::TwiML::Response.new do |r|
+  #     r.Message message
+  #   end
+  #   render text: response.text
+  # end
 
-  # Limit incoming params.
-  def appointment_params
-    params.require(:appointment).permit(:name, :phone, :message)
-  end
+  
 end
